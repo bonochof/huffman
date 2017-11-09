@@ -9,10 +9,10 @@ input.each{ |line| line.strip! }
 
 # init tree
 tree = Array.new
+tree.push( Array.new )
 input.each do |pair|
   val = pair.split
-  tree.push( [val[0], val[1].to_f, nil, nil] )
+  tree[0].push( [val[0], val[1].to_f, nil, nil] )
 end
 
 p tree
-
