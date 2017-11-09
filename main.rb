@@ -37,4 +37,32 @@ until tree.all?{ |node| node[1] == 1.0 } do
   i += 1
 end
 
-p tree
+# trace node
+stack = Array.new
+visit = Hash.new( 0 )
+code = String.new
+node = tree[-1]
+stack.push( node )
+until node == nil do
+  # transition to child1
+  if node[2] != nil and visit[node[2]] == 0
+    visit[node[2]] = 1
+    node = tree.assoc( node[2] )
+    stack.push( node )
+    code << "0"
+    next
+  # transition to child2
+  elsif node[3] != nil and visit[node[3]] == 0
+    visit[node[3]] = 1
+    node = tree.assoc( node[3] )
+    stack.push( node )
+    code << "1"
+    next
+  # transition to parent
+  else
+    node = stack.pop
+    # display result
+    print node[0], ": ", code, "\n" if node != nil and ( node[2] == nil and node[3] == nil )
+    code.slice!( -1 )
+  end
+end
