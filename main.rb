@@ -30,7 +30,7 @@ pair = Array.new( 2 )
   tree[1][1] = 1.0
   
   # push node
-  tree.push( ["pair#{i}", pair[0][1]+pair[1][1], pair[0][0], pair[1][0]] )
+  tree.push( ["pair#{i}", (pair[0][1]+pair[1][1]).round(1), pair[0][0], pair[1][0]] )
 end
 
 p tree
