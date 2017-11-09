@@ -15,4 +15,9 @@ input.each do |pair|
   tree[0].push( [val[0], val[1].to_f, nil, nil] )
 end
 
+# sort tree
+tree[0].sort! do |a, b|
+  b[1] <=> a[1]
+end
+
 p tree
