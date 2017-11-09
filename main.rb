@@ -21,13 +21,13 @@ pair = Array.new( 2 )
     node[1]
   end
   
-  # make pair
-  pair[0] = Array.new( tree[0] )
-  pair[1] = Array.new( tree[1] )
-  
-  # change prob
-  tree[0][1] = 1.0
-  tree[1][1] = 1.0
+  2.times do |j|
+    # make pair
+    pair[j] = Array.new( tree[j] )
+    
+    # change prob
+    tree[j][1] = 1.0
+  end
   
   # push node
   tree.push( ["pair#{i}", (pair[0][1]+pair[1][1]).round(1), pair[0][0], pair[1][0]] )
