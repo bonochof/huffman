@@ -14,8 +14,9 @@ input.each do |pair|
   tree.push( [val[0], val[1].to_f, nil, nil] )
 end
 
+i = 0
 pair = Array.new( 2 )
-2.times do |i|
+until tree.all?{ |node| node[1] == 1.0 } do
   # sort tree
   tree.sort_by! do |node|
     node[1]
@@ -31,6 +32,9 @@ pair = Array.new( 2 )
   
   # push node
   tree.push( ["pair#{i}", (pair[0][1]+pair[1][1]).round(1), pair[0][0], pair[1][0]] )
+  
+  # increment
+  i += 1
 end
 
 p tree
