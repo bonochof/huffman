@@ -33,7 +33,7 @@ until tree.all?{ |node| node[1] == 1.0 } do
   end
   
   # push node
-  tree.push( ["pair#{i}", (pair[0][1]+pair[1][1]).round(1), pair[0][0], pair[1][0]] )
+  tree.push( ["pair#{i}", (pair[0][1]+pair[1][1]).round(3), pair[0][0], pair[1][0]] )
   
   # increment
   i += 1
