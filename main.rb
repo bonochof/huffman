@@ -9,9 +9,11 @@ input.each{ |line| line.strip! }
 
 # init tree
 tree = Array.new
+order = Array.new
 input.each do |pair|
   val = pair.split
   tree.push( [val[0], val[1].to_f, nil, nil] )
+  order.push( val[0] )
 end
 
 i = 0
@@ -66,4 +68,6 @@ until node == nil do
   end
 end
 
-p codes
+order.each do |c|
+  print c, ": ", codes[c], "\n"
+end
