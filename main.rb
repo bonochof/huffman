@@ -16,6 +16,11 @@ input.each do |pair|
   order.push( val[0] )
 end
 
+# error process
+if tree.size < 2
+  exit
+end
+
 i = 0
 pair = Array.new( 2 )
 until tree.all?{ |node| node[1] == 1.0 } do
