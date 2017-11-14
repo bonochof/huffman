@@ -73,6 +73,7 @@ until node == nil do
   end
 end
 
+# output
 order.each do |c|
   print c, ": ", codes[c], "\n"
 end
