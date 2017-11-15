@@ -10,14 +10,17 @@ input.each{ |line| line.strip! }
 # init tree
 tree = Array.new
 order = Array.new
+sum = 0.0
 input.each do |pair|
   val = pair.split
   tree.push( [val[0], val[1].to_f, nil, nil] )
   order.push( val[0] )
+  sum += val[1].to_f
 end
 
 # error process
-if tree.size < 2
+if tree.size < 2 or sum != 1.0
+  puts "ERROR: invalid argument"
   exit
 end
 
