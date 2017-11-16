@@ -77,7 +77,11 @@ until node == nil do
 end
 
 # output
+length = 0.0
 puts
 order.each do |c|
   print c, ": ", codes[c], "\n"
+  length += codes[c].length
 end
+puts
+print "L = ", length/order.size, "\n"
