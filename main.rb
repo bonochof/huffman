@@ -2,9 +2,19 @@
 
 puts "============ Huffman Coding ============"
 
+# init
+sources = Array.new( ARGV )
+sources = ["0", "1"] if sources.empty?
+
+# error process
+if sources.size < 2
+  puts "ERROR: incorrect number of arguments"
+  exit
+end
+
 # input
 puts "INPUT: code1 prob1, code2 prob2, ..."
-input = gets.split(",")
+input = STDIN.gets.split(",")
 input.each{ |line| line.strip! }
 
 # init tree
