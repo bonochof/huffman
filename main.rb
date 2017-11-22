@@ -71,14 +71,14 @@ until node == nil do
     visit[node[2]] = 1
     node = tree.assoc( node[2] )
     stack.push( node )
-    code << "0"
+    code << sources[0]
     codes[node[0]] = code.clone
   # transition to child2
   elsif node[3] != nil and visit[node[3]] == 0
     visit[node[3]] = 1
     node = tree.assoc( node[3] )
     stack.push( node )
-    code << "1"
+    code << sources[1]
     codes[node[0]] = code.clone
   # transition to parent
   else
