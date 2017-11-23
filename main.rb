@@ -20,6 +20,7 @@ input.each{ |line| line.strip! }
 # init tree
 tree = Array.new
 order = Array.new
+search = Hash.new( 0 )
 sum = 0.0
 input.each do |pair|
   val = pair.split
@@ -29,6 +30,7 @@ input.each do |pair|
   end
   tree.push( init_node )
   order.push( val[0] )
+  search[val[0]] = 1
   sum += val[1].to_f
 end
 
@@ -80,26 +82,29 @@ code = String.new
 node = tree[-1]
 stack.push( node )
 until node == nil do
-p node
-  nextloop = false
+  back = true
   code = codes[node[0]].clone
   
   # transition to child
   sources.size.times do |i|
     if node[i+2] != nil and visit[node[i+2]] == 0
+      search[node[0]] = 1 if i == sources.size - 1
       visit[node[i+2]] = 1
       node = tree.assoc( node[i+2] )
       stack.push( node )
       code << sources[i]
       codes[node[0]] = code.clone
-      nextloop = true
+      back = false
       break
     end
   end
-  
   # transition to parent
-  if !nextloop
-    node = stack.pop
+  if back
+    if stack.empty? or search[stack.last[0]] == 1
+      node = stack.pop
+    else
+      node = stack.last
+    end
   end
 end
 
