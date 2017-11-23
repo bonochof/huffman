@@ -23,7 +23,11 @@ order = Array.new
 sum = 0.0
 input.each do |pair|
   val = pair.split
-  tree.push( [val[0], val[1].to_f, nil, nil] )
+  init_node = [val[0], val[1].to_f]
+  sources.size.times do |i|
+    init_node.push( nil )
+  end
+  tree.push( init_node )
   order.push( val[0] )
   sum += val[1].to_f
 end
@@ -35,14 +39,14 @@ if tree.size < 2 or sum != 1.0
 end
 
 i = 0
-pair = Array.new( 2 )
+pair = Array.new( sources.size )
 until tree.all?{ |node| node[1] == 1.0 } do
   # sort tree
   tree.sort_by! do |node|
     node[1]
   end
   
-  2.times do |j|
+  sources.size.times do |j|
     # make pair
     pair[j] = Array.new( tree[j] )
     
@@ -50,8 +54,19 @@ until tree.all?{ |node| node[1] == 1.0 } do
     tree[j][1] = 1.0
   end
   
+  # make pair node
+  pair_node = ["pair#{i}"]
+  pair_prob = 0
+  sources.size.times do |k|
+    pair_prob += pair[k][1]
+  end
+  pair_node.push( pair_prob.round(3) )
+  sources.size.times do |k|
+    pair_node.push( pair[k][0] )
+  end
+  
   # push node
-  tree.push( ["pair#{i}", (pair[0][1]+pair[1][1]).round(3), pair[0][0], pair[1][0]] )
+  tree.push( pair_node )
   
   # increment
   i += 1
@@ -65,23 +80,25 @@ code = String.new
 node = tree[-1]
 stack.push( node )
 until node == nil do
+p node
+  nextloop = false
   code = codes[node[0]].clone
-  # transition to child1
-  if node[2] != nil and visit[node[2]] == 0
-    visit[node[2]] = 1
-    node = tree.assoc( node[2] )
-    stack.push( node )
-    code << sources[0]
-    codes[node[0]] = code.clone
-  # transition to child2
-  elsif node[3] != nil and visit[node[3]] == 0
-    visit[node[3]] = 1
-    node = tree.assoc( node[3] )
-    stack.push( node )
-    code << sources[1]
-    codes[node[0]] = code.clone
+  
+  # transition to child
+  sources.size.times do |i|
+    if node[i+2] != nil and visit[node[i+2]] == 0
+      visit[node[i+2]] = 1
+      node = tree.assoc( node[i+2] )
+      stack.push( node )
+      code << sources[i]
+      codes[node[0]] = code.clone
+      nextloop = true
+      break
+    end
+  end
+  
   # transition to parent
-  else
+  if !nextloop
     node = stack.pop
   end
 end
