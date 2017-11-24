@@ -22,6 +22,10 @@ tree = Array.new
 order = Array.new
 search = Hash.new( 0 )
 sum = 0.0
+10.times do |i|
+  node_num = ( sources.size - 1 ) * ( i + 1 ) + 1
+  break if node_num >= sources.size
+end
 input.each do |pair|
   val = pair.split
   init_node = [val[0], val[1].to_f]
