@@ -44,6 +44,7 @@ if tree.size < 2 or sum != 1.0
   exit
 end
 
+# make tree
 i = 0
 pair = Array.new( sources.size )
 until tree.all?{ |node| node[1] == 1.0 } do
