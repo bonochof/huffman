@@ -22,10 +22,23 @@ tree = Array.new
 order = Array.new
 search = Hash.new( 0 )
 sum = 0.0
+# calc node num
+node_num = 0
 10.times do |i|
   node_num = ( sources.size - 1 ) * ( i + 1 ) + 1
-  break if node_num >= sources.size
+  break if node_num >= input.size
 end
+# add supplement node
+( node_num - input.size ).times do |i|
+  node_name = Time.now.usec.to_s
+  init_node = [node_name, 0.0]
+  sources.size.times do |i|
+    init_node.push( nil )
+  end
+  tree.push( init_node )
+  search[node_name] = 1
+end
+# add input node
 input.each do |pair|
   val = pair.split
   init_node = [val[0], val[1].to_f]
@@ -87,6 +100,7 @@ code = String.new
 node = tree[-1]
 stack.push( node )
 until node == nil do
+p node
   back = true
   code = codes[node[0]].clone
   
