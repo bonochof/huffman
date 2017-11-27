@@ -100,7 +100,6 @@ code = String.new
 node = tree[-1]
 stack.push( node )
 until node == nil do
-p node
   back = true
   code = codes[node[0]].clone
   
