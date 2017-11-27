@@ -52,7 +52,7 @@ input.each do |pair|
 end
 
 # error process
-if tree.size < 2 or sum != 1.0
+if tree.size < 2 or sum.round(3) != 1.0
   puts "ERROR: invalid argument"
   exit
 end
