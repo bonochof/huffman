@@ -1,5 +1,6 @@
 # coding: utf-8
 
+# display
 puts "============ Huffman Coding ============"
 
 # init
